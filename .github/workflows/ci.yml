@@ -24,6 +24,10 @@ jobs:
         node-version: 22
     - name: Run timestamp regression tests
       run: npm test
+    - name: Validate Netlify configuration and CSP
+      run: |
+        python3 scripts/validate_netlify.py
+        python3 -m unittest discover -s scripts -p "test_validate_netlify.py" -v
     - name: Validate pages and local assets
       run: node scripts/validate-frontend.mjs
     - name: Check JavaScript syntax
